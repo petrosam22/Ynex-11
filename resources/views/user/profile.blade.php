@@ -1,6 +1,4 @@
-
-
-@extends('layouts.dashboard');
+ @extends('layouts.dashboard');
 
 
 @section('content');
@@ -38,7 +36,8 @@
                                     <div class="sm:flex items-start p-6      main-profile-cover">
                                         <div>
                                             <span class="avatar avatar-xxl avatar-rounded online me-4">
-                                                <img src="../assets/images/faces/9.jpg" alt="">
+                                                <img src="{{asset( 'image/user/' . auth()->user()->photo)}}" alt="">
+                                                
                                             </span>
                                         </div>
                                         <div class="flex-grow main-profile-info">
@@ -51,11 +50,11 @@
                                                 
                                                 </button>
                                             </div>
-                                            <p class="mb-1 !text-white  opacity-[0.7]">Chief Executive Officer (C.E.O)</p>
+                                            <p class="mb-1 !text-white  opacity-[0.7]">{{ auth()->user()->position }}</p>
                                             <p class="text-[0.75rem] text-white mb-6 opacity-[0.5]">
-                                                <span class="me-4 inline-flex"><i class="ri-building-line me-1 align-middle"></i>Georgia</span>
-                                                <span class="inline-flex"><i class="ri-map-pin-line me-1 align-middle"></i>Washington D.C</span>
-                                            </p>
+                                                <span class="me-4 inline-flex"><i class="ri-building-line me-1 align-middle"></i>
+                                                {{ auth()->user()->phone }}
+                                             </p>
                                             <div class="flex mb-0">
                                                 <div class="me-6">
                                                     <p class="font-bold text-[1.25rem] text-white text-shadow mb-0">113</p>
@@ -83,10 +82,13 @@
                                             <p class="text-[.9375rem] mb-2 font-semibold">Links :</p>
                                             <div class="mb-0">
                                                 <p class="mb-1">
-                                                    <a href="javascript:void(0)" class="text-primary"><u>https://www.spruko.com/</u></a>
+                                                    <a href="https://www.linkedin.com/in/peter-samir-051403234//" class="text-primary"> 
+
+                                                    linkedin 
+                                                </a>
                                                 </p>
                                                 <p class="mb-0">
-                                                    <a href="javascript:void(0)" class="text-primary"><u>https://themeforest.net/user/ spruko/portfolio</u></a>
+                                                    <a href="https://github.com/petrosam22?tab=repositories" class="text-primary"> github </a>
                                                 </p>
                                             </div>
                                         </div>
@@ -98,13 +100,13 @@
                                                 <span class="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
                                                     <i class="ri-mail-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
                                                 </span>
-                                                sonyataylor2531@gmail.com
+                                                {{auth()->user()->email}}
                                             </p>
                                             <p class="mb-2">
                                                 <span class="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
                                                     <i class="ri-phone-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
                                                 </span>
-                                                +(555) 555-1234
+                                             {{auth()->user()->phone}}
                                             </p>
                                             
                                         </div>

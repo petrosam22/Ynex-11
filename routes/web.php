@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Middleware\AuthUser;
+use App\Http\Middleware\AuthUser; 
+use App\Http\Middleware\Is_verfiy;
+
 use App\Http\Controllers\ProfileController;
 
 
@@ -17,9 +19,11 @@ Route::prefix('user')->group(function(){
     Route::get('/logout',[AuthController::class,'logout'])->name('user.logout');
 });
 
-Route::middleware(AuthUser::class)->prefix('profile')->group(function(){
+Route::middleware([AuthUser::class,Is_verfiy::class])->prefix('profile')->group(function(){
     Route::get('/', [ProfileController::class, 'profile'])->name('user.profile');
     Route::get('/setting', [ProfileController::class, 'setting'])->name('user.setting');
+ 
+    
 });
 
 
@@ -274,10 +278,4 @@ Route::prefix('blog')->group(function(){
 
 
 
-Route::prefix('user')->group(function(){
-    Route::get('/profile', function (){
-        return view('user.profile');
-
-    })->name('user.profile');
-
- });
+ 

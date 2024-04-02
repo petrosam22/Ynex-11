@@ -1068,11 +1068,11 @@
 
                                 <button id="dropdown-profile" type="button"
                                     class="hs-dropdown-toggle ti-dropdown-toggle !gap-2 !p-0 flex-shrink-0 sm:me-2 me-0 !rounded-full !shadow-none text-xs align-middle !border-0 !shadow-transparent ">
-                                    <img class="inline-block rounded-full " src="../assets/images/faces/9.jpg"  width="32" height="32" alt="Image Description">
+                                    <img class="inline-block rounded-full " src="{{asset('image/user/' . auth()->user()->photo)}}"  width="32" height="32" alt="Image Description">
                                 </button>
                                 <div class="md:block hidden dropdown-profile">
-                                    <p class="font-semibold mb-0 leading-none text-[#536485] text-[0.813rem] ">Json Taylor</p>
-                                    <span class="opacity-[0.7] font-normal text-[#536485] block text-[0.6875rem] ">Web Designer</span>
+                                    <p class="font-semibold mb-0 leading-none text-[#536485] text-[0.813rem] ">{{auth()->user()->name}}</p>
+                                    <span class="opacity-[0.7] font-normal text-[#536485] block text-[0.6875rem] ">{{auth()->user()->position}}</span>
                                 </div>
                                 <div
                                     class="hs-dropdown-menu ti-dropdown-menu !-mt-3 border-0 w-[11rem] !p-0 border-defaultborder hidden main-header-dropdown  pt-0 overflow-hidden header-profile-dropdown dropdown-menu-end"
@@ -1080,7 +1080,7 @@
 
                                     <ul class="text-defaulttextcolor font-medium dark:text-[#8c9097] dark:text-white/50">
                                         <li>
-                                            <a class="w-full ti-dropdown-item !text-[0.8125rem] !gap-x-0  !p-[0.65rem] !inline-flex" href="profile.html">
+                                            <a class="w-full ti-dropdown-item !text-[0.8125rem] !gap-x-0  !p-[0.65rem] !inline-flex" href="{{route('user.profile')}}">
                                             <i class="ti ti-user-circle text-[1.125rem] me-2 opacity-[0.7]"></i>Profile
                                             </a>
                                         </li>
@@ -1326,7 +1326,7 @@
 
                             <!-- Start::slide -->                                            
                             <li class="slide has-sub">
-                                <a href="javascript:void(0);" class="side-menu__item">
+                                <a href="{{route('user.profile')}}" class="side-menu__item">
                                     <i class="bx bxs-photo-album side-menu__icon"></i>
                                     <span class="side-menu__label">Profile<span
                                         class="text-secondary text-[0.75em] rounded-sm badge !py-[0.25rem] !px-[0.45rem] !bg-secondary/10 ms-2">Not</span></span>

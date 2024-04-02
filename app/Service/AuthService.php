@@ -60,11 +60,12 @@ class AuthService
             'email'=>$request->email,
         ];
         $user = User::where('email',$request->email)->first();
-
+ 
         if( $this->authRepositories->Login($credentials)){
 
-        return   $user->is_verify == true ?   redirect()->route('user.profile') :
-            redirect()->route('user.verifyForm');
+        return   $user->is_verify == true ? 
+           redirect()->route('user.profile') :
+           redirect()->route('user.verifyForm');
 
          }
         return redirect()->route('user.loginForm');

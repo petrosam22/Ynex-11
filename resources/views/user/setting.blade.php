@@ -87,7 +87,7 @@
                                     <div class="sm:grid grid-cols-12 gap-6 mb-6">
                                         <div class="xl:col-span-6 col-span-12">
                                             <label for="first-name" class="form-label">First Name</label>
-                                            <input type="text" class="form-control w-full !rounded-md" id="first-name" placeholder="Firt Name">
+                                            <input type="text" value="{{$user->name}}" class="form-control w-full !rounded-md" id="first-name" placeholder="Firt Name">
                                         </div>
                                        
                                         
@@ -98,15 +98,15 @@
                                     <div class="sm:grid grid-cols-12 gap-6 mb-6">
                                         <div class="xl:col-span-6 col-span-12">
                                             <label for="email-address" class="form-label">Email Address :</label>
-                                            <input type="text" class="form-control w-full !rounded-md" id="email-address" placeholder="xyz@gmail.com">
+                                            <input type="text" value="{{$user->email}}" class="form-control w-full !rounded-md" id="email-address" placeholder="xyz@gmail.com">
                                         </div>
                                         <div class="xl:col-span-6 col-span-12">
                                             <label for="Contact-Details" class="form-label">Contact Details :</label>
-                                            <input type="text" class="form-control w-full !rounded-md" id="Contact-Details" placeholder="contact details">
+                                            <input type="text" value="{{$user->phone}}" class="form-control w-full !rounded-md" id="Contact-Details" placeholder="contact details">
                                         </div>
                                         <div class="xl:col-span-6 col-span-12">
                                             <label for="Contact-Details" class="form-label">Position :</label>
-                                            <input type="text" class="form-control w-full !rounded-md" id="Contact-Details" placeholder="Position">
+                                            <input type="text" value="{{$user->position}}" class="form-control w-full !rounded-md" id="Contact-Details" placeholder="Position">
                                         </div>
                                         
                                         <div class="xl:col-span-6 col-span-12">
