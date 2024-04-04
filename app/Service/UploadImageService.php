@@ -8,7 +8,7 @@ use App\Http\Requests\AuthRequest;
 
 class UploadImageService {
     use UploadImageTrait;
-    public function uploadPhoto(AuthRequest $request){
+    public function uploadPhoto($request){
 
         if($request->hasFile('photo')){
             $photo =$request->photo;

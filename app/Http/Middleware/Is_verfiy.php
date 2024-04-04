@@ -16,7 +16,8 @@ class Is_verfiy
      */
     public function handle(Request $request, Closure $next): Response
     {
-            if(Auth::user()->is_verify == 1){
+
+        if(Auth::user()->is_verify){
                 return $next($request);
 
             }else{

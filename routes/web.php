@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AuthUser; 
 use App\Http\Middleware\Is_verfiy;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
+use App\Http\Controllers\SkillsController;
 use App\Http\Controllers\ProfileController;
 
 
@@ -21,10 +22,26 @@ Route::prefix('user')->group(function(){
 
 Route::middleware([AuthUser::class,Is_verfiy::class])->prefix('profile')->group(function(){
     Route::get('/', [ProfileController::class, 'profile'])->name('user.profile');
-    Route::get('/setting', [ProfileController::class, 'setting'])->name('user.setting');
+    Route::get('/setting', [ProfileController::class, 'setting'])->name('user.setting'); 
+    Route::post('/update/{id}', [ProfileController::class, 'update'])->name('user.update');
+
  
     
 });
+
+Route::middleware([AuthUser::class,Is_verfiy::class])->prefix('skills')->group(function(){
+
+    Route::get('/create/form', [SkillsController::class, 'create'])->name('skills.create');
+    Route::get('/edit/form/{id}', [SkillsController::class, 'edit'])->name('skills.editForm'); 
+    Route::post('/store', [SkillsController::class, 'store'])->name('skills.store');
+
+     Route::post('/update/{id}', [SkillsController::class, 'update'])->name('skills.update'); 
+     Route::delete('/delete/{id}', [SkillsController::class, 'delete'])->name('skills.delete');
+
+
+    
+});
+
 
 
 

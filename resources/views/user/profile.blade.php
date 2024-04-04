@@ -114,46 +114,49 @@
                                  
                                     
                                     <div class="p-6 border-b dark:border-defaultborder/10 border-dashed">
+                               <div class="flex justify-between">
+                                    <div class="">
+
                                         <p class="text-[.9375rem] mb-2 me-6 font-semibold">Skills :</p>
-                                        <div>
-                                            <a href="javascript:void(0);">
-                                                <span class="badge bg-light text-[#8c9097] dark:text-white/50 m-1">Cloud computing</span>
-                                            </a>
-                                            <a href="javascript:void(0);">
-                                                <span class="badge bg-light text-[#8c9097] dark:text-white/50 m-1">Data analysis</span>
-                                            </a>
-                                            <a href="javascript:void(0);">
-                                                <span class="badge bg-light text-[#8c9097] dark:text-white/50 m-1">DevOps</span>
-                                            </a>
-                                            <a href="javascript:void(0);">
-                                                <span class="badge bg-light text-[#8c9097] dark:text-white/50 m-1">Machine learning</span>
-                                            </a>
-                                            <a href="javascript:void(0);">
-                                                <span class="badge bg-light text-[#8c9097] dark:text-white/50 m-1">Programming</span>
-                                            </a>
-                                            <a href="javascript:void(0);">
-                                                <span class="badge bg-light text-[#8c9097] dark:text-white/50 m-1">Security</span>
-                                            </a>
-                                            <a href="javascript:void(0);">
-                                                <span class="badge bg-light text-[#8c9097] dark:text-white/50 m-1">Python</span>
-                                            </a>
-                                            <a href="javascript:void(0);">
-                                                <span class="badge bg-light text-[#8c9097] dark:text-white/50 m-1">JavaScript</span>
-                                            </a>
-                                            <a href="javascript:void(0);">
-                                                <span class="badge bg-light text-[#8c9097] dark:text-white/50 m-1">Ruby</span>
-                                            </a>
-                                            <a href="javascript:void(0);">
-                                                <span class="badge bg-light text-[#8c9097] dark:text-white/50 m-1">PowerShell</span>
-                                            </a>
-                                            <a href="javascript:void(0);">
-                                                <span class="badge bg-light text-[#8c9097] dark:text-white/50 m-1">Statistics</span>
-                                            </a>
-                                            <a href="javascript:void(0);">
-                                                <span class="badge bg-light text-[#8c9097] dark:text-white/50 m-1">SQL</span>
-                                            </a>
-                                        </div>
                                     </div>
+
+                                    <div>
+                                    <button type="button" class="hs-dropdown-toggle ti-btn ti-btn-primary-full !py-1 !px-2 !text-[0.75rem]" data-hs-overlay="#create-task">
+                                  <a href="{{route('skills.create')}}">
+                                    <i class="ri-add-line font-semibold align-middle"></i>
+                                    </a>          
+                                </button>
+
+
+ 
+                                    </div>
+
+                                    </div>
+
+                                        <div>
+                                        @foreach($skills as $skill)
+
+                                             <a href="{{route('skills.editForm',['id'=>$skill->id])}}">
+
+                                                <span class="badge bg-light text-[#8c9097] dark:text-white/50 m-1">
+                                                    {{$skill->name}}                          
+                                                <form action="{{route('skills.delete',['id'=>$skill->id])}}" method="post" class="m-0">
+                                               @method('DELETE')
+                                                @csrf 
+                                                <button type="submit" class="hs-dropdown-toggle  ms-2 " >
+
+                                                <i class="ri-delete-bin-3-line"></i>
+                                                 </button>
+                                                 </form>
+                                             </span>
+
+                                            </a>
+                                            @endforeach
+
+                                        </div>
+
+                                    </div>
+                                    
                                     <div class="p-6">
                                         <p class="text-[.9375rem] mb-2 me-6 font-semibold">Followers :</p>
                                         <ul class="list-group">
