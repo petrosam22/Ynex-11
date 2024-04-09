@@ -5,11 +5,14 @@ namespace App\Providers;
 use App\Service\AuthService;
 use App\Service\RoleService;
 use App\Service\SkillService;
+use App\Service\StatusService;
 use App\Service\ProfileService;
 use App\Service\UploadImageService;
+use App\Service\PasswordResetService;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use App\Service\VerificationCodeService;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,9 +24,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AuthService::class);
         $this->app->bind(RoleService::class);
         $this->app->bind(UploadImageService::class);
-        $this->app->bind(VerificationCodeService::class); 
-        $this->app->bind(SkillService::class); 
+        $this->app->bind(VerificationCodeService::class);
+        $this->app->bind(SkillService::class);
         $this->app->bind(ProfileService::class);
+        $this->app->bind(PasswordResetService::class);
+        $this->app->bind(StatusService::class);
 
 
 
@@ -35,6 +40,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
+        Paginator::defaultView('pagination.custom_pagination');
+
 
     }
 }

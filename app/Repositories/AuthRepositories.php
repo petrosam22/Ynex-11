@@ -7,6 +7,7 @@ namespace App\Repositories;
  use Illuminate\Support\Facades\Auth;
 use App\Interfaces\AuthRepositoryInterface;
 use NextApps\VerificationCode\VerificationCode;
+use Illuminate\Http\Request;
 
 
 class AuthRepositories implements AuthRepositoryInterface{
@@ -39,6 +40,13 @@ class AuthRepositories implements AuthRepositoryInterface{
         return  auth()->logout();
     }
 
+
+
+    public function locked(){
+        $user =User::where('id',Auth::user()->id)->first();
+
+        return $user;
+    }
 
 
 

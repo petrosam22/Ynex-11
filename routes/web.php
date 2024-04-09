@@ -1,12 +1,16 @@
 <?php
 
-use App\Http\Middleware\AuthUser; 
+use App\Http\Middleware\AuthUser;
+use App\Http\Middleware\Is_locked;
 use App\Http\Middleware\Is_verfiy;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SkillsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\StatusController;
 
 
 Route::get('/',[AuthController::class,'registerForm'])->name('user.registerForm');
@@ -18,31 +22,62 @@ Route::prefix('user')->group(function(){
     Route::post('/Login',[AuthController::class,'Login'])->name('user.Login');
     Route::post('/verify',[AuthController::class,'verify'])->name('user.verify')->middleware(AuthUser::class);
     Route::get('/logout',[AuthController::class,'logout'])->name('user.logout');
+    Route::get('/lock/screen', [AuthController::class, 'lockedPage'])->
+  name('user.lockScreen');
+
+
+  Route::post('/locked',[AuthController::class,'locked'])
+  ->name('user.locked')
+  ->middleware(AuthUser::class);
+
 });
 
-Route::middleware([AuthUser::class,Is_verfiy::class])->prefix('profile')->group(function(){
+Route::middleware([AuthUser::class,Is_verfiy::class,Is_locked::class])->prefix('profile')->group(function(){
     Route::get('/', [ProfileController::class, 'profile'])->name('user.profile');
-    Route::get('/setting', [ProfileController::class, 'setting'])->name('user.setting'); 
+    Route::get('/setting', [ProfileController::class, 'setting'])->name('user.setting');
     Route::post('/update/{id}', [ProfileController::class, 'update'])->name('user.update');
 
- 
-    
+    Route::post('/notifications/read', [ProfileController::class, 'notificationsRead'])->name('read.notifications');
+    Route::get('/notifications', [ProfileController::class, 'notifications'])->name('notifications.index');
+
+
+
 });
 
-Route::middleware([AuthUser::class,Is_verfiy::class])->prefix('skills')->group(function(){
+Route::middleware([AuthUser::class,Is_verfiy::class,Is_locked::class])->prefix('skills')->group(function(){
 
     Route::get('/create/form', [SkillsController::class, 'create'])->name('skills.create');
-    Route::get('/edit/form/{id}', [SkillsController::class, 'edit'])->name('skills.editForm'); 
+    Route::get('/edit/form/{id}', [SkillsController::class, 'edit'])->name('skills.editForm');
     Route::post('/store', [SkillsController::class, 'store'])->name('skills.store');
 
-     Route::post('/update/{id}', [SkillsController::class, 'update'])->name('skills.update'); 
+     Route::post('/update/{id}', [SkillsController::class, 'update'])->name('skills.update');
      Route::delete('/delete/{id}', [SkillsController::class, 'delete'])->name('skills.delete');
 
 
-    
+
+});
+Route::prefix('password')->group(function(){
+
+    Route::get('/forget/form', [PasswordResetController::class, 'forgetPasswordForm'])->name('user.forgetPasswordForm');
+    Route::get('/reset/form', [PasswordResetController::class, 'resetPasswordForm'])->name('user.resetPasswordForm');
+    Route::post('/forget', [PasswordResetController::class, 'forgetPassword'])->name('user.forgetPassword');
+    Route::post('/reset', [PasswordResetController::class, 'resetPassword'])->name('user.resetPassword');
+
+
+
 });
 
 
+Route::middleware([AuthUser::class,Is_verfiy::class,Is_locked::class])->prefix('status')->group(function(){
+
+    Route::get('/all', [StatusController::class, 'index'])->name('status.index');
+    Route::post('/create', [StatusController::class, 'create'])->name('status.create');
+    Route::delete('/delete/{id}', [StatusController::class, 'delete'])->name('status.delete');
+    Route::get('/edit/{id}', [StatusController::class, 'edit'])->name('status.edit');
+    Route::put('/update/{id}', [StatusController::class, 'update'])->name('status.update');
+
+    
+});
 
 
 
@@ -173,37 +208,7 @@ Route::prefix('lessons')->group(function(){
 
 
 
-Route::prefix('user')->group(function(){
 
-Route::get('/signup' ,function(){
-    return view('authentication.signUp');
-})->name('user.signup');
-
-    Route::get('/signIn' ,function(){
-        return view('authentication.signIn');
-    })->name('user.signIn');
-
-    Route::get('/resetPassword' ,function(){
-        return view('authentication.resetPassword');
-    })->name('user.resetpassword');
-
-
-    Route::get('/lockScreen' ,function(){
-        return view('authentication.lockScreen');
-    })->name('lockScreen');
-
-
-
-    Route::get('/verification' ,function(){
-        return view('authentication.verification ');
-    })->name('verification');
-
-    Route::get('/createPassword' ,function(){
-        return view('authentication.createPassword');
-    })->name('user.createPassword');
-
-
-});
 
 
 Route::prefix('tasks')->group(function(){
@@ -295,4 +300,3 @@ Route::prefix('blog')->group(function(){
 
 
 
- 

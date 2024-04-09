@@ -23,8 +23,8 @@ class SkillsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=> 'required|alpha|unique:skills',
- 
+            'name'=> 'required|string|unique:skills',
+
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Skill;
 use Illuminate\Http\Request;
 use App\Service\ProfileService;
@@ -18,10 +19,11 @@ class ProfileController extends Controller
     }
 
     public function profile(){
-        $skills = Skill::all();
-    
+         $skills = Skill::all();
+
         return view('user.profile',compact('skills'));
     }
+
 
     public function setting(){
         $user = Auth::user();
@@ -29,11 +31,32 @@ class ProfileController extends Controller
             'user'
         ));
     }
+    public function notificationsRead(){
+        $user = Auth::user();
+
+    foreach ($user->unreadNotifications as $notification) {
+        $notification->markAsRead();
+    }
+return redirect()->back();
+
+}
+
+
+
+    public function notifications(){
+        $notifications = Auth::user()->notifications;
+
+    
+         return view('notifications.index',compact('notifications'));
+    }
+
+
+
+
 
     public function update(Request $request,$id){
          $profile= $this->ProfileService->update($request,$id);
-      dd($profile);
-         //  return redirect()->route('user.setting');
- 
+           return redirect()->route('user.setting');
+
     }
 }

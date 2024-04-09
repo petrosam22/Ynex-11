@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Role;
 use App\Models\Skill;
+use App\Models\Status;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,6 +28,7 @@ class User extends Authenticatable
         'phone',
         'position',
         'is_verify',
+        'is_locked'
     ];
 
     /**
@@ -53,13 +55,8 @@ class User extends Authenticatable
     }
 
 
-    public function setPhoneAttribute($value)
-    {
-     // Remove all whitespace
-    $value = str_replace(' ', '', $value); // Remove spaces
-    $this->attributes['phone'] = '+20' . $value;
 
-     }
+
 
     public function roles(){
         return $this->belongsToMany(Role::class, 'role_user');
@@ -68,6 +65,9 @@ class User extends Authenticatable
 
     public function skills(){
         return $this->hasMany(Skill::class);
+    }
+    public function Status(){
+        return $this->hasMany(Status::class);
     }
 
 }

@@ -2,6 +2,8 @@
 
 namespace App\Interfaces;
 use App\Models\User;
+use Illuminate\Http\Request;
+
 interface AuthRepositoryInterface
 {
     public function register(array $data);
@@ -9,5 +11,6 @@ interface AuthRepositoryInterface
     public function verify(User $user ,$code);
 
    public function logout();
+   public function locked();
 
 }

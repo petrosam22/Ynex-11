@@ -105,7 +105,7 @@
 
                                         <div class="xl:col-span-6 col-span-12">
                                             <label for="bio" class="form-label">Bio :</label>
-                                            <textarea class="form-control w-full !rounded-md dark:!text-defaulttextcolor/70" name="bio" id="bio" rows="5">Lorem ipsum dolor sit amet consectetur adipisicing elit. At sit impedit, officiis non minima saepe voluptates a magnam enim sequi porro veniam ea suscipit dolorum vel mollitia voluptate iste nemo!</textarea>
+                                            <textarea class="form-control w-full !rounded-md dark:!text-defaulttextcolor/70" name="bio" id="bio" rows="5">{{ $user->bio }}</textarea>
                                         </div>
                                     </div>
                                 </div>

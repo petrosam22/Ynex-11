@@ -9,11 +9,11 @@
 		<meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="Author" content="Spruko Technologies Private Limited">
-        <meta name="Description" content="Ynex - PHP Tailwind CSS Admin & Dashboard Template">
+        <meta name="Description" content="Ynex">
         <meta name="keywords" content="admin template, admin dashboard, php admin panel, admin, tailwind css dashboard, php admin dashboard, tailwind admin template, tailwind template, php dashboard, dashboard, tailwind, tailwind dashboard, tailwind css, tailwind css template">
 
         <!-- TITLE -->
-		<title> Ynex - PHP Tailwind CSS Admin & Dashboard Template </title>
+		<title> Ynex </title>
 
         <!-- FAVICON -->
         <link rel="icon" href="https://php.spruko.com/tailwind/ynex/ynex/assets/images/brand-logos/favicon.ico" type="image/x-icon">

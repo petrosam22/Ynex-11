@@ -10,11 +10,11 @@
 		<meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="Author" content="Spruko Technologies Private Limited">
-        <meta name="Description" content="Ynex - PHP Tailwind CSS Admin & Dashboard Template">
+        <meta name="Description" content="Ynex">
         <meta name="keywords" content="admin template, admin dashboard, php admin panel, admin, tailwind css dashboard, php admin dashboard, tailwind admin template, tailwind template, php dashboard, dashboard, tailwind, tailwind dashboard, tailwind css, tailwind css template">
 
         <!-- TITLE -->
-		<title> Ynex - PHP Tailwind CSS Admin & Dashboard Template </title>
+		<title> Ynex </title>
 
         <!-- FAVICON -->
         <link rel="icon" href="https://php.spruko.com/tailwind/ynex/ynex/assets/images/brand-logos/favicon.ico" type="image/x-icon">
@@ -45,27 +45,29 @@
                     <div class="p-[3rem]">
                         <div class="mb-4">
                             <a aria-label="anchor" href="index.html">
-                                <img src="../assets/images/brand-logos/desktop-logo.png" alt="" class="authentication-brand desktop-logo">
-                                <img src="../assets/images/brand-logos/desktop-dark.png" alt="" class="authentication-brand desktop-dark">
+                                <img src="{{ asset('assets/images/brand-logos/desktop-logo.png') }}" alt="" class="authentication-brand desktop-logo">
+                                <img src="{{ asset('assets/images/brand-logos/desktop-dark.png') }}" alt="" class="authentication-brand desktop-dark">
                             </a>
                         </div>
                         <p class="h5 font-semibold mb-2">Lock Screen</p>
-                        <p class="mb-4 text-[#8c9097] dark:text-white/50 opacity-[0.7] font-normal">Hello Jhon !</p>
+                        <p class="mb-4 text-[#8c9097] dark:text-white/50 opacity-[0.7] font-normal">Hello {{ $user->name }} !</p>
                         <div class="flex items-center mb-6">
                             <div class="leading-none">
                                 <span class="avatar avatar-md avatar-rounded">
-                                    <img src="../assets/images/faces/15.jpg" alt="">
+                                    <img src="{{ asset('image/user/' . $user->photo) }}" alt="">
                                 </span>
                             </div>
                             <div class="ms-4">
-                                <p class="mb-0 font-semibold text-dark">jhonslicer21@gmail.com</p>
+                                <p class="mb-0 font-semibold text-dark">{{ $user->email }}</p>
                             </div>
                         </div>
+                         <form method="POST" action="{{route('user.locked')}}">
+                            @csrf 
                         <div class="grid grid-cols-12 gap-y-4">
                             <div class="xl:col-span-12 col-span-12 mb-4">
                                 <label for="lockscreen-password" class="form-label text-default">Password</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control form-control-lg !rounded-e-none" id="lockscreen-password" placeholder="password">
+                                    <input type="password" name="password" class="form-control form-control-lg !rounded-e-none" id="lockscreen-password" placeholder="password">
                                     <button class="ti-btn ti-btn-light !mb-0 !rounded-s-none" aria-label="button" type="button" onclick="createpassword('lockscreen-password',this)" id="button-addon2"><i class="ri-eye-off-line align-middle"></i></button>
                                 </div>
                                 <div class="mt-2">
@@ -78,9 +80,11 @@
                                 </div>
                             </div>
                             <div class="xl:col-span-12 col-span-12 grid mt-2">
-                                <a href="index.html" class="ti-btn ti-btn-lg bg-primary text-white !font-medium dark:border-defaultborder/10">Unlock</a>
+                                <button  type="submit" class="ti-btn ti-btn-lg bg-primary text-white !font-medium dark:border-defaultborder/10">Unlock</button>
                             </div>
                         </div>
+
+                    </form>
                         <div class="text-center">
                             <p class="text-[0.75rem] text-[#8c9097] dark:text-white/50 mt-4">Try unlock with different methods <a class="text-success" href="javascript:void(0);"><u>Finger print</u></a> / <a class="text-success" href="javascript:void(0);"><u>Face Id</u></a></p>
                         </div>
@@ -96,7 +100,7 @@
                                       <div class="text-white text-center p-[3rem] flex items-center justify-center">
                                           <div>
                                               <div class="mb-[3rem]">
-                                                  <img src="../assets/images/authentication/2.png" class="authentication-image" alt="">
+                                                  <img src="{{ asset('assets/images/authentication/2.png') }}" class="authentication-image" alt="">
                                               </div>
                                               <h6 class="font-semibold text-[1rem]">Lockscreen</h6>
                                                   <p class="font-normal text-[.875rem] opacity-[0.7]"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa eligendi expedita aliquam quaerat nulla voluptas facilis. Porro rem voluptates possimus, ad, autem quae culpa architecto, quam labore blanditiis at ratione.</p>
@@ -107,7 +111,7 @@
                                       <div class="text-white text-center p-[3rem] flex items-center justify-center">
                                           <div>
                                               <div class="mb-[3rem]">
-                                                  <img src="../assets/images/authentication/3.png" class="authentication-image" alt="">
+                                                  <img src="{{ asset('assets/images/authentication/3.png') }}" class="authentication-image" alt="">
                                               </div>
                                               <h6 class="font-semibold text-[1rem]">Lockscreen</h6>
                                                   <p class="font-normal text-[.875rem] opacity-[0.7]"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa eligendi expedita aliquam quaerat nulla voluptas facilis. Porro rem voluptates possimus, ad, autem quae culpa architecto, quam labore blanditiis at ratione.</p>
@@ -118,7 +122,7 @@
                                       <div class="text-white text-center p-[3rem] flex items-center justify-center">
                                           <div>
                                               <div class="mb-[3rem]">
-                                                  <img src="../assets/images/authentication/2.png" class="authentication-image" alt="">
+                                                  <img src="{{ asset('assets/images/authentication/2.png') }}" class="authentication-image" alt="">
                                               </div>
                                               <h6 class="font-semibold text-[1rem]">Lockscreen</h6>
                                                   <p class="font-normal text-[.875rem] opacity-[0.7]"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa eligendi expedita aliquam quaerat nulla voluptas facilis. Porro rem voluptates possimus, ad, autem quae culpa architecto, quam labore blanditiis at ratione.</p>

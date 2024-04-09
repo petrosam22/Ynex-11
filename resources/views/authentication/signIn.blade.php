@@ -10,11 +10,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Author" content="Spruko Technologies Private Limited">
-    <meta name="Description" content="Ynex - PHP Tailwind CSS Admin & Dashboard Template">
+    <meta name="Description" content="Ynex">
     <meta name="keywords" content="admin template, admin dashboard, php admin panel, admin, tailwind css dashboard, php admin dashboard, tailwind admin template, tailwind template, php dashboard, dashboard, tailwind, tailwind dashboard, tailwind css, tailwind css template">
 
     <!-- TITLE -->
-    <title> Ynex - PHP Tailwind CSS Admin & Dashboard Template </title>
+    <title> Ynex </title>
 
     <!-- FAVICON -->
     <link rel="icon" href="https://php.spruko.com/tailwind/ynex/ynex/assets/images/brand-logos/favicon.ico" type="image/x-icon">
@@ -74,7 +74,8 @@
                         <div class="xl:col-span-12 col-span-12 mb-4">
                             <label for="signin-password" class="form-label text-default block">Password
 
-                                <a href="" class="ltr:float-right rtl:float-left text-danger">Forget password ?</a></label>
+
+                                <a href="{{ route('user.forgetPasswordForm') }}" class="ltr:float-right rtl:float-left text-danger">Forget password ?</a></label>
                             <div class="input-group">
                                 <input type="password" name="password" class="form-control form-control-lg !rounded-e-none" id="signin-password" placeholder="password">
                                 <button aria-label="button" type="button" class="ti-btn ti-btn-light !rounded-s-none !mb-0" onclick="createpassword('signin-password',this)" id="button-addon2"><i class="ri-eye-off-line align-middle"></i></button>

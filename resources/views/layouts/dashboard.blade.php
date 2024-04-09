@@ -8,11 +8,11 @@
 		<meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="Author" content="Spruko Technologies Private Limited">
-        <meta name="Description" content="Ynex - PHP Tailwind CSS Admin & Dashboard Template">
+        <meta name="Description" content="Ynex">
         <meta name="keywords" content="admin template, admin dashboard, php admin panel, admin, tailwind css dashboard, php admin dashboard, tailwind admin template, tailwind template, php dashboard, dashboard, tailwind, tailwind dashboard, tailwind css, tailwind css template">
 
         <!-- TITLE -->
-		<title> Ynex - PHP Tailwind CSS Admin & Dashboard Template </title>
+		<title> Ynex </title>
 
         <!-- FAVICON -->
         <link rel="icon" href="https://php.spruko.com/tailwind/ynex/ynex/assets/images/brand-logos/favicon.ico" type="image/x-icon">
@@ -808,137 +808,80 @@
 
                             <!--Header Notifictaion -->
                             <div class="header-element py-[1rem] md:px-[0.65rem] px-2 notifications-dropdown header-notification hs-dropdown ti-dropdown !hidden md:!block [--placement:bottom-left]">
+                              {{--  <form method="POST" action="{{route('read')}}">  --}}
                                 <button id="dropdown-notification" type="button"
                                     class="hs-dropdown-toggle relative ti-dropdown-toggle !p-0 !border-0 flex-shrink-0  !rounded-full !shadow-none align-middle text-xs">
                                     <i class="bx bx-bell header-link-icon  text-[1.125rem]"></i>
                                     <span class="flex absolute h-5 w-5 -top-[0.25rem] end-0  -me-[0.6rem]">
                                     <span
                                         class="animate-slow-ping absolute inline-flex -top-[2px] -start-[2px] h-full w-full rounded-full bg-secondary/40 opacity-75"></span>
-                                    <span
+                                            {{--  @foreach (auth()->user()->unreadNotifications  as $notification )  --}}
+
+                                        <span
                                         class="relative inline-flex justify-center items-center rounded-full  h-[14.7px] w-[14px] bg-secondary text-[0.625rem] text-white"
-                                        id="notification-icon-badge">5</span>
+                                        id="notification-icon-badge">{{ auth()->user()->unreadNotifications->count() }}
+
+
                                     </span>
+                                    {{--  @endforeach  --}}
+
+
+                                    </span>
+
+
+
                                 </button>
+                            {{--  </form>  --}}
                                 <div class="main-header-dropdown !-mt-3 !p-0 hs-dropdown-menu ti-dropdown-menu bg-white !w-[22rem] border-0 border-defaultborder hidden !m-0"
                                     aria-labelledby="dropdown-notification">
 
                                     <div class="ti-dropdown-header !m-0 !p-4 !bg-transparent flex justify-between items-center">
                                     <p class="mb-0 text-[1.0625rem] text-defaulttextcolor font-semibold dark:text-[#8c9097] dark:text-white/50">Notifications</p>
-                                    <span class="text-[0.75em] py-[0.25rem/2] px-[0.45rem] font-[600] rounded-sm bg-secondary/10 text-secondary"
-                                        id="notifiation-data">5 Unread</span>
+                                    <div>
+                                        <form method="POST" action="{{route('read.notifications')}}">
+                                            @csrf
+                                            
+                                        <button type="submit" class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 ">
+                                            <i class="ti ti-x text-[1rem]"></i>
+                                    </button>
+                                </form>
                                     </div>
+
+                                </div>
                                     <div class="dropdown-divider"></div>
                                     <ul class="list-none !m-0 !p-0 end-0" id="header-notification-scroll">
+
+                                        @foreach (auth()->user()->notifications as $notification )
+
                                     <li class="ti-dropdown-item dropdown-item ">
                                         <div class="flex items-start">
                                         <div class="pe-2">
                                             <span
-                                            class="inline-flex text-primary justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem] !bg-primary/10 !rounded-[50%]"><i
-                                                class="ti ti-gift text-[1.125rem]"></i></span>
+                                            class="inline-flex text-primary justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem] !bg-primary/10 !rounded-[50%]">
+                                            <i  class="{{ $notification->data['icon'] }}"></i>
+                                        </span>
+ 
                                         </div>
                                         <div class="grow flex items-center justify-between">
                                             <div>
                                             <p class="mb-0 text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50 text-[0.8125rem] font-semibold"><a
-                                                href="notifications.html">Your Order Has Been Shipped</a></p>
-                                            <span class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">Order No: 123456
-                                                Has Shipped To Your Delivery Address</span>
-                                            </div>
-                                            <div>
-                                            <a aria-label="anchor" href="javascript:void(0);" class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"><i
-                                                class="ti ti-x text-[1rem]"></i></a>
-                                            </div>
+                                                href="notifications.html">  {{ $notification->data['message'] }}</a></p>
+                                            <span class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">
+                                                {{ $notification->data['description'] ?? '' }}</span>
+
+                                             </div>
+                                           
                                         </div>
                                         </div>
                                     </li>
-                                    <li class="ti-dropdown-item dropdown-item !flex-none">
-                                        <div class="flex items-start">
-                                        <div class="pe-2">
-                                            <span
-                                            class="inline-flex text-secondary justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem]  bg-secondary/10 rounded-[50%]"><i
-                                                class="ti ti-discount-2 text-[1.125rem]"></i></span>
-                                        </div>
-                                        <div class="grow flex items-center justify-between">
-                                            <div>
-                                            <p class="mb-0 text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50 text-[0.8125rem]  font-semibold"><a
-                                                href="notifications.html">Discount Available</a></p>
-                                            <span class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">Discount
-                                                Available On Selected Products</span>
-                                            </div>
-                                            <div>
-                                            <a aria-label="anchor" href="javascript:void(0);" class="min-w-fit  text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"><i
-                                                class="ti ti-x text-[1rem]"></i></a>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </li>
-                                    <li class="ti-dropdown-item dropdown-item">
-                                        <div class="flex items-start">
-                                        <div class="pe-2">
-                                            <span
-                                            class="inline-flex text-pink justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem]  bg-pink/10 rounded-[50%]"><i
-                                                class="ti ti-user-check text-[1.125rem]"></i></span>
-                                        </div>
-                                        <div class="grow flex items-center justify-between">
-                                            <div>
-                                            <p class="mb-0 text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50 text-[0.8125rem]  font-semibold"><a
-                                                href="notifications.html">Account Has Been Verified</a></p>
-                                            <span class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">Your Account Has
-                                                Been Verified Sucessfully</span>
-                                            </div>
-                                            <div>
-                                            <a aria-label="anchor" href="javascript:void(0);" class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"><i
-                                                class="ti ti-x text-[1rem]"></i></a>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </li>
-                                    <li class="ti-dropdown-item dropdown-item">
-                                        <div class="flex items-start">
-                                        <div class="pe-2">
-                                            <span
-                                            class="inline-flex text-warning justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem]  bg-warning/10 rounded-[50%]"><i
-                                                class="ti ti-circle-check text-[1.125rem]"></i></span>
-                                        </div>
-                                        <div class="grow flex items-center justify-between">
-                                            <div>
-                                            <p class="mb-0 text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50  text-[0.8125rem]  font-semibold"><a
-                                                href="notifications.html">Order Placed <span class="text-warning">ID: #1116773</span></a></p>
-                                            <span class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">Order Placed
-                                                Successfully</span>
-                                            </div>
-                                            <div>
-                                            <a aria-label="anchor" href="javascript:void(0);" class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"><i
-                                                class="ti ti-x text-[1rem]"></i></a>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </li>
-                                    <li class="ti-dropdown-item dropdown-item">
-                                        <div class="flex items-start">
-                                        <div class="pe-2">
-                                            <span
-                                            class="inline-flex text-success justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem]  bg-success/10 rounded-[50%]"><i
-                                                class="ti ti-clock text-[1.125rem]"></i></span>
-                                        </div>
-                                        <div class="grow flex items-center justify-between">
-                                            <div>
-                                            <p class="mb-0 text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50  text-[0.8125rem]  font-semibold"><a
-                                                href="notifications.html">Order Delayed <span class="text-success">ID: 7731116</span></a></p>
-                                            <span class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">Order Delayed
-                                                Unfortunately</span>
-                                            </div>
-                                            <div>
-                                            <a aria-label="anchor" href="javascript:void(0);" class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 dropdown-item-close1"><i
-                                                class="ti ti-x text-[1rem]"></i></a>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </li>
+                                    @endforeach
+
                                     </ul>
 
                                     <div class="p-4 empty-header-item1 border-t mt-2">
                                     <div class="grid">
-                                        <a href="notifications.html" class="ti-btn ti-btn-primary-full !m-0 w-full p-2">View All</a>
+                                        <a href="{{route('notifications.index')}}" class="ti-btn ti-btn-primary-full !m-0 w-full p-2">View All</a>
+                                
                                     </div>
                                     </div>
                                     <div class="p-[3rem] empty-item1 hidden">
@@ -1167,137 +1110,47 @@
                                     <li class="slide side-menu__label1">
                                         <a href="javascript:void(0)">Dashboards</a>
                                     </li>
-                                  
+
                                     <li class="slide">
                                         <a href="{{route('crypto.analytics')}}" class="side-menu__item">Crypto</a>
                                     </li>
-                                    
+
                                     <li class="slide">
                                         <a href="{{ route('project.Analytics') }}" class="side-menu__item">Projects</a>
                                     </li>
-                                     
+
                                     <li class="slide">
                                         <a href="{{route('course.analytics')}}" class="side-menu__item">Courses</a>
                                     </li>
- 
+
                                 </ul>
                             </li>
                             <!-- End::slide -->
                             <!-- Start::slide__category -->
                             <li class="slide__category"><span class="category-name">Pages</span></li>
-                            <!-- End::slide__category -->
-
-                            <!-- Start::slide -->
+                          
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <i class="bx bx-file-blank side-menu__icon"></i>
                                     <span class="side-menu__label">Pages<span
-                                        class="text-secondary text-[0.75em] rounded-sm !py-[0.25rem] !px-[0.45rem] badge !bg-secondary/10 ms-2">New</span></span>
-                                    <i class="fe fe-chevron-right side-menu__angle"></i>
-                                </a>
-                                 <ul class="slide-menu child1">
-                                    <li class="slide side-menu__label1"><a href="javascript:void(0)">Pages</a></li>
-                                  
-                                   
-                                      
-                                  
-                                   
-                                </ul>
-                            </li> 
-                            <!-- End::slide -->
-                            <!-- Start::slide -->                                               
-                            <!-- <li class="slide has-sub">
-                                <a href="javascript:void(0);" class="side-menu__item">
-                                    <i class="bx bx-task side-menu__icon"></i>
-                                    <span class="side-menu__label">Notifications<span
-                                        class="text-secondary text-[0.75em] rounded-sm badge !py-[0.25rem] !px-[0.45rem] !bg-secondary/10 ms-2">Not</span></span>
-                                    <i class="fe fe-chevron-right side-menu__angle"></i>
-                                </a>
+                                        class="text-secondary text-[0.75em] rounded-sm badge !py-[0.25rem] !px-[0.45rem] !bg-secondary/10 ms-2">New</span></span>
+                                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                                    </a>
                                 <ul class="slide-menu child1">
-                                 <li class="slide side-menu__label1">
-                                        <a href="javascript:void(0)">Notifications</a>
-                                    </li>
+                                
                                      <li class="slide">
-                                        <a href="task-kanban-board.html" class="side-menu__item">Notifications</a>
+                                        <a href="{{route('status.index')}}" class="side-menu__item">Status</a>
                                     </li>
-                                 </ul>
-                            </li> -->
-                            <!-- End::slide -->
-                            <!-- Start::slide -->                                               
-                            <!-- <li class="slide has-sub">
-                                <a href="javascript:void(0);" class="side-menu__item">
-                                    <i class="bx bx-task side-menu__icon"></i>
-                                    <span class="side-menu__label">Chat<span
-                                        class="text-secondary text-[0.75em] rounded-sm badge !py-[0.25rem] !px-[0.45rem] !bg-secondary/10 ms-2">Not</span></span>
-                                    <i class="fe fe-chevron-right side-menu__angle"></i>
-                                </a>
-                                <ul class="slide-menu child1">
-                                 <li class="slide side-menu__label1">
-                                        <a href="javascript:void(0)">Chat</a>
-                                    </li>
-                                     <li class="slide">
-                                        <a href="task-kanban-board.html" class="side-menu__item">Chat</a>
-                                    </li>
-                                 </ul>
-                            </li> -->
-                            <!-- End::slide -->
-                            <!-- Start::slide -->                                               
-                            <!-- <li class="slide has-sub">
-                                <a href="javascript:void(0);" class="side-menu__item">
-                                    <i class="bx bx-task side-menu__icon"></i>
-                                    <span class="side-menu__label">File Manager<span
-                                        class="text-secondary text-[0.75em] rounded-sm badge !py-[0.25rem] !px-[0.45rem] !bg-secondary/10 ms-2">Not</span></span>
-                                    <i class="fe fe-chevron-right side-menu__angle"></i>
-                                </a>
-                                <ul class="slide-menu child1">
-                                 <li class="slide side-menu__label1">
-                                        <a href="javascript:void(0)">File Manager</a>
-                                    </li>
-                                     <li class="slide">
-                                        <a href="task-kanban-board.html" class="side-menu__item">File Manager</a>
-                                    </li>
-                                 </ul>
-                            </li> -->
-                            <!-- End::slide -->
 
+                                    <li class="slide">
+                                        <a href="{{route('notifications.index')}}" class="side-menu__item">Notifications</a>
+                                    </li>
 
-                            <!-- Start::slide -->                                               
-                            <!-- <li class="slide has-sub">
-                                <a href="javascript:void(0);" class="side-menu__item">
-                                    <i class="bx bx-task side-menu__icon"></i>
-                                    <span class="side-menu__label">Contacts<span
-                                        class="text-secondary text-[0.75em] rounded-sm badge !py-[0.25rem] !px-[0.45rem] !bg-secondary/10 ms-2">Not</span></span>
-                                    <i class="fe fe-chevron-right side-menu__angle"></i>
-                                </a>
-                                <ul class="slide-menu child1">
-                                 <li class="slide side-menu__label1">
-                                        <a href="javascript:void(0)">Contacts</a>
-                                    </li>
-                                     <li class="slide">
-                                        <a href="task-kanban-board.html" class="side-menu__item">Contacts</a>
-                                    </li>
+                                    
                                  </ul>
-                            </li> -->
+                            </li>
                             <!-- End::slide -->
-                            <!-- Start::slide -->                                               
-                            <!-- <li class="slide has-sub">
-                                <a href="javascript:void(0);" class="side-menu__item">
-                                    <i class="bx bx-task side-menu__icon"></i>
-                                    <span class="side-menu__label">Reviews<span
-                                        class="text-secondary text-[0.75em] rounded-sm badge !py-[0.25rem] !px-[0.45rem] !bg-secondary/10 ms-2">Not</span></span>
-                                    <i class="fe fe-chevron-right side-menu__angle"></i>
-                                </a>
-                                <ul class="slide-menu child1">
-                                 <li class="slide side-menu__label1">
-                                        <a href="javascript:void(0)">Reviews</a>
-                                    </li>
-                                     <li class="slide">
-                                        <a href="task-kanban-board.html" class="side-menu__item">Reviews</a>
-                                    </li>
-                                 </ul>
-                            </li> -->
-                            <!-- End::slide -->
-                            <!-- Start::slide -->                                             
+ 
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <i class="bx bxs-group side-menu__icon"></i>
@@ -1315,7 +1168,7 @@
 
                                     <li class="slide">
                                         <a href="{{route('team.index')}}" class="side-menu__item">Teams</a>
-                                    </li> 
+                                    </li>
 
                                     <li class="slide">
                                         <a href="{{route('team.create')}}" class="side-menu__item">Create</a>
@@ -1324,7 +1177,7 @@
                             </li>
                             <!-- End::slide -->
 
-                            <!-- Start::slide -->                                            
+                            <!-- Start::slide -->
                             <li class="slide has-sub">
                                 <a href="{{route('user.profile')}}" class="side-menu__item">
                                     <i class="bx bxs-photo-album side-menu__icon"></i>
@@ -1344,7 +1197,7 @@
                             <!-- End::slide -->
 
 
-                            <!-- Start::slide -->                                         
+                            <!-- Start::slide -->
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <i class="bx bxs-time side-menu__icon"></i>
@@ -1364,7 +1217,7 @@
                             <!-- End::slide -->
 
 
-                            <!-- Start::slide -->                                               
+                            <!-- Start::slide -->
                             <!-- <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <i class="bx bx-task side-menu__icon"></i>
@@ -1383,8 +1236,8 @@
                             </li> -->
                             <!-- End::slide -->
 
-                            
-                            <!-- Start::slide --> 
+
+                            <!-- Start::slide -->
 
                                 <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
@@ -1396,8 +1249,8 @@
                                 <ul class="slide-menu child1">
                                  <li class="slide side-menu__label1">
                                         <a href="javascript:void(0)">Workspaces</a>
-                                    </li> 
-                                     
+                                    </li>
+
                                      <li class="slide">
                                         <a href="{{route('workspaces.all')}}" class="side-menu__item">Workspaces</a>
                                     </li>
@@ -1416,10 +1269,10 @@
                                     </li>
 
                                  </ul>
-                            </li>  
+                            </li>
 
 
-                            <li class="slide has-sub"> 
+                            <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <i class="bx bxs-home side-menu__icon"></i>
                                     <span class="side-menu__label">Company<span
@@ -1429,25 +1282,25 @@
                                 <ul class="slide-menu child1">
                                  <li class="slide side-menu__label1">
                                         <a href="javascript:void(0)">Company</a>
-                                    </li> 
-                                     
+                                    </li>
+
                                     <li class="slide">
                                         <a href="{{route('companies.all')}}" class="side-menu__item">Companies</a>
                                     </li>
-                                    
+
                                  </ul>
-                            </li>  
+                            </li>
 
 
 
                             <!-- End::slide -->
 
-                            
-                            <!-- Start::slide --> 
-                                                 
+
+                            <!-- Start::slide -->
+
 
                                   <!-- <li class="slide has-sub">
-                                <a href="" class="side-menu__item"> 
+                                <a href="" class="side-menu__item">
                                      <i class='bx bxs-briefcase side-menu__icon' ></i>
                                     <span class="side-menu__label">Workspaces<span
                                         class="text-secondary text-[0.75em] rounded-sm badge !py-[0.25rem] !px-[0.45rem] !bg-secondary/10 ms-2">New</span></span>
@@ -1464,7 +1317,7 @@
                                         <a href="{{route('tasks.listView')}}" class="side-menu__item">Learning Workspace</a>
                                     </li>
                                     <li class="slide">
-                                        <a href="{{route('tasks.show')}}" class="side-menu__item">Dates Workspace</a> 
+                                        <a href="{{route('tasks.show')}}" class="side-menu__item">Dates Workspace</a>
                                     </li>
 
                                     <li class="slide">
@@ -1499,7 +1352,7 @@
                                         <a href="{{route('tasks.listView')}}" class="side-menu__item">List View</a>
                                     </li>
                                     <li class="slide">
-                                        <a href="{{route('tasks.show')}}" class="side-menu__item">Task Details</a> 
+                                        <a href="{{route('tasks.show')}}" class="side-menu__item">Task Details</a>
                                     </li>
 
                                     <li class="slide">
@@ -1521,45 +1374,19 @@
                                 </a>
                                 <ul class="slide-menu child1">
                                     <li class="slide side-menu__label1"><a href="javascript:void(0)">Authentication</a></li>
-                                     <li class="slide has-sub"><a href="javascript:void(0);" class="side-menu__item">Create
-                                            Password<i class="fe fe-chevron-right side-menu__angle"></i></a>
-                                        <ul class="slide-menu child2">
-                                             <li class="slide"><a href="{{ route('user.createPassword') }}"
-                                                    class="side-menu__item">Cover</a></li>
-                                        </ul>
-                                    </li>
+
                                     <li class="slide has-sub"><a href="javascript:void(0);" class="side-menu__item">Lockscreen<i
                                                 class="fe fe-chevron-right side-menu__angle"></i></a>
                                         <ul class="slide-menu child2">
-                                             <li class="slide"><a href="{{ route('lockScreen') }}" class="side-menu__item">Cover</a>
+                                             <li class="slide"><a href="{{ route('user.lockScreen') }}" class="side-menu__item">Cover</a>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="slide has-sub"><a href="javascript:void(0);" class="side-menu__item">Reset Password<i
-                                                class="fe fe-chevron-right side-menu__angle"></i></a>
-                                        <ul class="slide-menu child2">
-                                             <li class="slide"><a href="{{route('user.resetpassword')}}" class="side-menu__item">Cover</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="slide has-sub"><a href="javascript:void(0);" class="side-menu__item">Sign Up<i
-                                                class="fe fe-chevron-right side-menu__angle"></i></a>
-                                        <ul class="slide-menu child2">
-                                             <li class="slide"><a href="{{route('user.signup')}}" class="side-menu__item">Cover</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="slide has-sub"><a href="javascript:void(0);" class="side-menu__item">Sign In<i
-                                                class="fe fe-chevron-right side-menu__angle"></i></a>
-                                        <ul class="slide-menu child2">
-                                             <li class="slide"><a href="{{route('user.signIn')}}" class="side-menu__item">Cover</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="slide has-sub"><a href="javascript:void(0);" class="side-menu__item">Two Step
-                                            Verfication<i class="fe fe-chevron-right side-menu__angle"></i></a>
-                                        <ul class="slide-menu child2">
-                                             <li class="slide"><a href="{{route('verification')}}" class="side-menu__item">Cover</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+
+
+
+
+
                                  </ul>
                             </li>
                             <!-- End::slide -->
@@ -1824,7 +1651,7 @@
                                     <li class="slide">
                                         <a href="gallery.html" class="side-menu__item">Gallery</a>
                                     </li>
-                                     
+
                                     <li class="slide has-sub">
                                         <a href="javascript:void(0);" class="side-menu__item">Jobs
                                             <i class="fe fe-chevron-right side-menu__angle"></i></a>
@@ -1891,7 +1718,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    
+
                                 </ul>
                             </li>
                             <!-- End::slide -->
@@ -1910,7 +1737,7 @@
                                     <li class="slide">
                                         <a href="{{route('event.calendar')}}" class="side-menu__item">Full Calendar</a>
                                     </li>
-                                    
+
                                 </ul>
                             </li>
                             <!-- End::slide -->
@@ -1936,7 +1763,7 @@
                                     <li class="slide">
                                         <a href="{{route('project.create')}}" class="side-menu__item">Projects Create</a>
                                     </li>
-                                    
+
                                 </ul>
                             </li>
                             <!-- End::slide -->
@@ -1961,7 +1788,7 @@
                                     <li class="slide">
                                         <a href="{{route('course.create')}}" class="side-menu__item">Courses Create</a>
                                     </li>
-                                    
+
                                 </ul>
                             </li>
                             <!-- End::slide -->
@@ -1996,12 +1823,12 @@
                                     <li class="slide">
                                         <a href="{{route('crypto.wallet')}}" class="side-menu__item">Wallet</a>
                                     </li>
-                                    
+
                                 </ul>
                             </li>
                             <!-- End::slide -->
 
-                          
+
 
                             <!-- Start::slide__category -->
                             <li class="slide__category"><span class="category-name">Tables &amp; Charts</span></li>
@@ -2147,7 +1974,7 @@
             </aside>
             <!-- END SIDEBAR -->
 
-            @yield('content');
+            @yield('content')
 
 <div id="search-modal" class="hs-overlay ti-modal hidden mt-[1.75rem]">
     <div class="ti-modal-box">
@@ -2248,7 +2075,7 @@
     </div>
 </div>
 
-            @include('layouts.footer');
+            @include('layouts.footer')
 
 
 
@@ -2362,11 +2189,7 @@
         <script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>
 
 
-
-<!-- Quill Editor JS -->
  
-<!-- Filepond JS -->
-
 
 
 

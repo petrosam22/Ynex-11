@@ -1,33 +1,46 @@
-<?php 
+<?php
 
 
 namespace App\Service;
 
+ use Illuminate\Http\Request;
 use App\Service\UploadImageService;
-use App\Http\Requests\UpdateProfileRequest;
-use App\Interfaces\ProfileRepositoryInterface;
+ use App\Interfaces\ProfileRepositoryInterface;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\UpdateProfileNotification;
+
 
 class ProfileService{
 
- 
+
 
     private ProfileRepositoryInterface $profileRepository ;
     private UploadImageService $uploadImageService ;
 
-    public function __construct(ProfileRepositoryInterface $profileRepository){
+    public function __construct(ProfileRepositoryInterface $profileRepository , UploadImageService $uploadImageService){
         $this->profileRepository = $profileRepository;
+        $this->uploadImageService = $uploadImageService;
     }
 
-    public function update(UpdateProfileRequest $request , $id){
+    public function update(Request $request , $id){
 
-      
-        $data = $request->validated();
-        $data['photo'] =  $this->uploadImageService->uploadPhoto($request);
+        $user =  $this->profileRepository->updateProfile($id);
+        $photo= $request->hasFile('photo') ?  $this->uploadImageService->uploadPhoto($request): $user->photo;
 
-       $profile =  $this->profileRepository->updateProfile($id);
-       $profile->update($data);
+       
+
+       $user->update([
+        'name'=> $request->name,  
+        'email'=> $request->email,  
+        'photo'=> $photo,  
+        'bio'=> $request->bio,  
+        'phone'=> $request->phone,  
+        'position'=> $request->position,  
+       ]);
+
+        Notification::send($user,new UpdateProfileNotification());
 
 
-         
+ return $user;
     }
 }

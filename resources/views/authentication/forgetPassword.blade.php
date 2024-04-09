@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-vertical-style="overlay" class="light" data-header-styles="light" data-menu-styles="light" data-toggled="close">
-    
+
 
     <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
@@ -9,11 +9,11 @@
 		<meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="Author" content="Spruko Technologies Private Limited">
-        <meta name="Description" content="Ynex - PHP Tailwind CSS Admin & Dashboard Template">
+        <meta name="Description" content="Ynex">
         <meta name="keywords" content="admin template, admin dashboard, php admin panel, admin, tailwind css dashboard, php admin dashboard, tailwind admin template, tailwind template, php dashboard, dashboard, tailwind, tailwind dashboard, tailwind css, tailwind css template">
-        
+
         <!-- TITLE -->
-		<title> Ynex - PHP Tailwind CSS Admin & Dashboard Template </title>
+		<title> Ynex </title>
 
         <!-- FAVICON -->
         <link rel="icon" href="https://php.spruko.com/tailwind/ynex/ynex/assets/images/brand-logos/favicon.ico" type="image/x-icon">
@@ -29,13 +29,17 @@
 
         <!-- SWIPER CSS -->
         <link rel="stylesheet" href="{{asset('assets/libs/swiper/swiper-bundle.min.css')}}">
-        
+
 
 	</head>
 
     <body class="bg-white dark:!bg-bodybg text-defaulttextcolor dark:text-defaulttextcolor/70 text-defaultsize">
+        @if(session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
 
-    
 
         <div class="grid grid-cols-12 authentication mx-0">
 
@@ -45,15 +49,15 @@
               <div class="xxl:col-span-6 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-8 col-span-12">
                 <div class="p-[3rem]">
                   <div class="mb-4">
-                    <a aria-label="anchor" href="index.html">
-                      <img src="../assets/images/brand-logos/desktop-logo.png" alt=""
+                    <a aria-label="anchor" href="/">
+                      <img src="{{ asset('assets/images/brand-logos/desktop-logo.png') }}" alt=""
                         class="authentication-brand desktop-logo">
-                      <img src="../assets/images/brand-logos/desktop-dark.png" alt=""
+                      <img src="{{ asset('assets/images/brand-logos/desktop-dark.png') }}" alt=""
                         class="authentication-brand desktop-dark">
                     </a>
                   </div>
                   <p class="h5 font-semibold mb-2">Create Password</p>
-                  <p class="mb-4 text-[#8c9097] dark:text-white/50 opacity-[0.7] font-normal">Hello Jhon !</p>
+                  <p class="mb-4 text-[#8c9097] dark:text-white/50 opacity-[0.7] font-normal">Hello {{ auth()->user()->name ?? ''}} !</p>
                   <div class="btn-list">
                     <button type="button" class="ti-btn ti-btn-lg ti-btn-light !font-medium me-[0.365rem] dark:border-defaultborder/10"><svg
                         class="google-svg" xmlns="http://www.w3.org/2000/svg" width="2443" height="2500"
@@ -73,42 +77,32 @@
                   <div class="text-center my-[3rem] authentication-barrier">
                     <span>OR</span>
                   </div>
+
+                  <form  action="{{route('user.forgetPassword')}}" method="POST">
+                    @csrf
                   <div class="grid grid-cols-12 gap-y-4">
                     <div class="xl:col-span-12 col-span-12 mt-0">
-                      <label for="create-password" class="form-label text-default">Password</label>
+                      <label for="create-password" class="form-label text-default">Email</label>
                       <div class="flex">
-                        <input type="password"
+                        <input type="email"
                           class="form-control form-control-lg  !w-full !rounded-e-none"
-                          id="create-password" placeholder="password">
+                          id="create-password" placeholder="email" required name="email">
                         <button onclick="createpassword('create-password',this)"
                           class="ti-btn ti-btn-light !mb-0 !rounded-s-none dark:border-white/10 !border-s-0"
                           aria-label="button" type="button"><i class="ri-eye-off-line align-middle"></i></button>
                       </div>
                     </div>
-                    <div class="xl:col-span-12 col-span-12 mb-4">
-                      <label for="create-confirmpassword" class="form-label text-default">Confirm Password</label>
-                      <div class="flex">
-                        <input type="password"
-                          class="form-control form-control-lg !w-full !rounded-e-none"
-                          id="create-confirmpassword" placeholder="password">
-                        <button onclick="createpassword('create-confirmpassword',this)"
-                          class="ti-btn ti-btn-light !mb-0 !rounded-s-none dark:border-white/10 !border-s-0"
-                          aria-label="button" type="button"><i class="ri-eye-off-line align-middle"></i></button>
-                      </div>
-                      <div class="mt-2">
-                        <div class="form-check !ps-0">
-                          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                          <label class="form-check-label text-[#8c9097] dark:text-white/50 font-normal" for="defaultCheck1">
-                            Remember password ?
-                          </label>
-                        </div>
-                      </div>
-                    </div>
+
+
                     <div class="xl:col-span-12 col-span-12 grid mt-2">
-                      <a href="index.html" type="button" class="ti-btn ti-btn-lg bg-primary text-white !font-medium dark:border-defaultborder/10">Save
-                        Password</a>
+                      <button   type="submit" class="ti-btn ti-btn-lg bg-primary text-white !font-medium dark:border-defaultborder/10">
+                        Continue
+                    </button>
                     </div>
                   </div>
+                </form>
+
+
                   <div class="text-center">
                     <p class="text-[0.75rem] text-[#8c9097] dark:text-white/50 mt-4">Back to home ? <a href="index.html"
                         class="text-primary">Click Here</a></p>
@@ -127,7 +121,7 @@
                       <div class="text-white text-center p-[3rem] flex items-center justify-center">
                         <div>
                           <div class="mb-[3rem]">
-                            <img src="../assets/images/authentication/2.png" class="authentication-image" alt="">
+                            <img src="{{ asset('assets/images/authentication/2.png') }}" class="authentication-image" alt="">
                           </div>
                           <h6 class="font-semibold text-[1rem]">Create Password</h6>
                           <p class="font-normal text-[0.875rem] opacity-[0.7]"> Lorem ipsum dolor sit amet, consectetur
@@ -140,7 +134,7 @@
                       <div class="text-white text-center p-[3rem] flex items-center justify-center">
                         <div>
                           <div class="mb-[3rem]">
-                            <img src="../assets/images/authentication/3.png" class="authentication-image" alt="">
+                            <img src="{{ asset('assets/images/authentication/3.png') }}" class="authentication-image" alt="">
                           </div>
                           <h6 class="font-semibold text-[1rem]">Create Password</h6>
                           <p class="font-normal text-[0.875rem] opacity-[0.7]"> Lorem ipsum dolor sit amet, consectetur
@@ -153,7 +147,7 @@
                       <div class="text-white text-center p-[3rem] flex items-center justify-center">
                         <div>
                           <div class="mb-[3rem]">
-                            <img src="../assets/images/authentication/2.png" class="authentication-image" alt="">
+                            <img src="{{ asset('assets/images/authentication/2.png') }}" class="authentication-image" alt="">
                           </div>
                           <h6 class="font-semibold text-[1rem]">Create Password</h6>
                           <p class="font-normal text-[0.875rem] opacity-[0.7]"> Lorem ipsum dolor sit amet, consectetur
@@ -172,9 +166,9 @@
           </div>
 
         </div>
-        
 
-        
+
+
 
         <!-- Swiper JS -->
         <script src="{{ asset('assets/libs/swiper/swiper-bundle.min.js') }}"></script>

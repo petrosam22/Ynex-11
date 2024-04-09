@@ -8,6 +8,7 @@ use App\Http\Requests\AuthRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Interfaces\AuthRepositoryInterface;
 use NextApps\VerificationCode\VerificationCode;
+use Illuminate\Support\Facades\Hash;
 
 class AuthService
 {
@@ -88,4 +89,20 @@ class AuthService
     public function logout(){
       return  $this->authRepositories->logout();
     }
+    public function locked(Request $request){
+
+        $user =$this->authRepositories->locked();
+        $user->is_locked = 0;
+        $user->save();
+
+
+ 
+        if( Hash::check($request->password , $user->password)){
+            return redirect()->route('user.profile');
+
+
+        }else{
+            return redirect()->back();
+        }
+     }
 }

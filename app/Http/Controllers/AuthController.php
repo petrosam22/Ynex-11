@@ -6,7 +6,8 @@ namespace App\Http\Controllers;
 use App\Service\AuthService;
 use Illuminate\Http\Request;
 use App\Http\Requests\AuthRequest;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -28,7 +29,13 @@ class AuthController extends Controller
     public function loginForm(){
         return view('authentication.signIn');
     }
-
+    public function lockedPage(){
+        $user = User::where('id',Auth::user()->id)->first();
+        $user->is_locked = 1;
+        $user->save();
+        return view('authentication.lockScreen',compact('user'));
+    }
+    
     public function register(AuthRequest $request) {
         $user = $this->AuthService->register($request);
 
@@ -59,4 +66,8 @@ class AuthController extends Controller
 
 
     }
+    public function locked(Request $request){
+ return $this->AuthService->locked($request);
+      }
+
 }
