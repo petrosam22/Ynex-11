@@ -36,16 +36,12 @@
                                         <div class="box-title">
                                             Total Events
 
-                                            <form action ="{{route('event.timeline')}}" method="get">
-                                                @csrf
-                                                <input class="form-control" type="search" id="all-tasks" name="search" aria-label="...">
-
-                                            </form>
+                                         
                                         </div>
                                         <div class="flex">
-                                            <a href="{{ route('event.remind') }}" class="hs-dropdown-toggle ti-btn ti-btn-primary-full !py-1 !px-2 !text-[0.75rem]" data-hs-overlay="#create-task">
+                                            <button type="button" class="hs-dropdown-toggle ti-btn ti-btn-primary-full !py-1 !px-2 !text-[0.75rem]" data-hs-overlay="#create-task">
                                                 <i class="ri-add-line font-semibold align-middle"></i> Create Event
-                                            </a>
+                                            </button>
                                             <div class="hs-dropdown ti-dropdown ms-2">
                                                 <button type="button" aria-label="button" class="ti-btn ti-btn-secondary ti-btn-sm" aria-expanded="false">
                                                     <i class="ti ti-dots-vertical"></i>
@@ -77,11 +73,10 @@
                                                          <th scope="col" class="text-start">Action</th>
                                                          <th scope="col" class="text-start">Close</th>
                                                          <th scope="col" class="text-start">Cancel</th>
-                                                         <th scope="col" class="text-start">Accept</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                @foreach ($events as $event )
+                                                @foreach ($results as $event )
 
                                                     <tr class="border border-defaultborder task-list">
                                                         <td class="task-checkbox"><input class="form-check-input" type="checkbox" value="" aria-label="..."></td>
@@ -105,7 +100,7 @@
                                                             <span class="badge {{$event->status->color}} text-white">
                                                                 {{ $event->status->name}}
 
-                                                            </span>
+                                                            </span> 
 
                                                         </td>
                                                         <td>
@@ -136,7 +131,7 @@
                                                                     <span
                                                                         class="hs-tooltip-content  ti-main-tooltip-content py-1 px-2 !bg-black !text-xs !font-medium !text-white shadow-sm "
                                                                         role="tooltip">
-                                                                      Close
+                                                                      Delete
                                                                     </span>
                                                                 </button>
                                                             </form>
@@ -151,22 +146,7 @@
                                                                     <span
                                                                         class="hs-tooltip-content  ti-main-tooltip-content py-1 px-2 !bg-black !text-xs !font-medium !text-white shadow-sm "
                                                                         role="tooltip">
-                                                                        Cancel
-                                                                    </span>
-                                                                </button>
-                                                            </form>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="hs-tooltip ti-main-tooltip">
-                                                                <form method="POST" action="{{route('event.accept',['id'=>$event->id])}}">
-                                                                    @csrf
-                                                                <button type="submit" class="text-danger ms-1 ti-btn-sm task-delete-btn">
-                                                                    Accept
-                                                                    <span
-                                                                        class="hs-tooltip-content  ti-main-tooltip-content py-1 px-2 !bg-black !text-xs !font-medium !text-white shadow-sm "
-                                                                        role="tooltip">
-                                                                        Accept
+                                                                      Delete
                                                                     </span>
                                                                 </button>
                                                             </form>
@@ -180,9 +160,9 @@
                                         </div>
                                     </div>
                                     <div class="box-footer">
+                                       
 
-                                        {{$events->links()}}
-
+                                        
                                     </div>
                                 </div>
                             </div>

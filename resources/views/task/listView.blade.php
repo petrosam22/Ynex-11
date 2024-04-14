@@ -38,7 +38,8 @@
                                         </div>
                                         <div class="flex">
                                             <button type="button" class="hs-dropdown-toggle ti-btn ti-btn-primary-full !py-1 !px-2 !text-[0.75rem]" data-hs-overlay="#create-task">
-                                                <i class="ri-add-line font-semibold align-middle"></i> Create Task
+                                                <i class="ri-add-line font-semibold align-middle">
+                                                    </i> Create Task
                                               </button>
                                             <div id="create-task" class="hs-overlay hidden ti-modal">
                                                 <div class="hs-overlay-open:mt-7 ti-modal-box mt-0 ease-out min-h-[calc(100%-3.5rem)] flex items-center">

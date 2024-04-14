@@ -13,6 +13,8 @@ use App\Interfaces\StatusRepositoryInterface;
 use App\Interfaces\ProfileRepositoryInterface;
 use App\Repositories\PasswordResetRepositories;
 use App\Interfaces\PasswordResetRepositoryInterface;
+use App\Interfaces\EventRepositoryInterface;
+use App\Repositories\EventRepositories;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -29,9 +31,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProfileRepositoryInterface::class,ProfileRepositories::class );
         $this->app->bind(PasswordResetRepositoryInterface::class,PasswordResetRepositories::class );
         $this->app->bind(StatusRepositoryInterface::class,StatusRepositories::class );
+        $this->app->bind(EventRepositoryInterface::class,EventRepositories::class );
 
-        
-        
+
+
+
 
 
 

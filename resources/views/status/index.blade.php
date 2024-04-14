@@ -66,6 +66,13 @@
                                                                 @error('name') <span class="text-danger">{{$message}}</span> @enderror
 
                                                             </div>
+                                                            <div class="xl:col-span-6 col-span-12">
+                                                                <label for="task-name" class="form-label">Status Color</label>
+                                                                <input type="text" class="form-control" name="color" id="task-name" placeholder="Status Name">
+                                                                @error('name') <span class="text-danger">{{$message}}</span> @enderror
+
+                                                            </div>
+                                                          
 
                                                             <div class="xl:col-span-6 col-span-12 hidden">
                                                                 <label for="task-id" class="form-label">User</label>
@@ -73,7 +80,18 @@
                                                             </div>
                                                             <div class="xl:col-span-6 col-span-12">
                                                                 <label for="task-id" class="form-label">Model</label>
-                                                                <input type="text" name="model" class="form-control" id="task-id" placeholder="Model Name">
+                                                               
+                                                                <select class="form-control" name="model">
+                                                                    <option value="" selected></option>
+                                                                     <option value="task">task</option>
+                                                                     <option value="project">project</option>
+                                                                     <option value="event">event</option>
+                                                                     <option value="course">course</option>
+                                                                     <option value="lesson">lesson</option>
+                                                                    <option value="workspaces">workspaces</option>
+                                                                    <option value="crypto"  >crypto</option>
+                                                                </select>
+                                                                {{--  <input type="text" name="model" class="form-control" id="task-id" placeholder="Model Name">  --}}
                                                                 @error('model') <span class="text-danger">{{$message}}</span> @enderror
 
                                                             </div>

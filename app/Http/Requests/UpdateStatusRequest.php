@@ -23,7 +23,8 @@ class UpdateStatusRequest extends FormRequest
     {
         return [
             'name'=>'sometimes',
-            'model'=>'sometimes'
+            'model'=>'sometimes',
+            'color'=>'sometimes'
         ];
     }
 }

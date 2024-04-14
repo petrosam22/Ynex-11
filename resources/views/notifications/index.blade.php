@@ -44,7 +44,7 @@
                         <li>
                             <div class="box un-read">
                                 <div class="box-body !p-4">
-                                    <a href="javascript:void(0);">
+                                    <a href="">
                                         <div class="flex items-start mt-0 flex-wrap">
                                             <div class="leading-top">
                                                 <span class="avatar avatar-md online me-4 avatar-rounded">
@@ -57,11 +57,7 @@
                  
                                                         </div>
  
-                                                    @elseif( $notification->data['image'])
-
-                                                        
-                                                        <img alt="avatar" src="../assets/images/faces/4.jpg">
-                                                    
+                                                     
                                                     @endif
                                                 </span>
                                             </div>
@@ -75,7 +71,7 @@
                                                     <div class="ms-auto">
                                                         <span class="ltr:float-right rtl:float-left badge bg-light text-[#8c9097] dark:text-white/50 whitespace-nowrap">
                                                            
-                                                            {{ $notification->created_at->format('D,M Y') }}
+                                                            {{ $notification->created_at->format('Y.M,D') }}
 
                                                         </span>
                                                     </div>

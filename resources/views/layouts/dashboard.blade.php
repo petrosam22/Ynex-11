@@ -823,7 +823,6 @@
 
 
                                     </span>
-                                    {{--  @endforeach  --}}
 
 
                                     </span>
@@ -831,8 +830,7 @@
 
 
                                 </button>
-                            {{--  </form>  --}}
-                                <div class="main-header-dropdown !-mt-3 !p-0 hs-dropdown-menu ti-dropdown-menu bg-white !w-[22rem] border-0 border-defaultborder hidden !m-0"
+                                 <div class="main-header-dropdown !-mt-3 !p-0 hs-dropdown-menu ti-dropdown-menu bg-white !w-[22rem] border-0 border-defaultborder hidden !m-0"
                                     aria-labelledby="dropdown-notification">
 
                                     <div class="ti-dropdown-header !m-0 !p-4 !bg-transparent flex justify-between items-center">
@@ -840,7 +838,7 @@
                                     <div>
                                         <form method="POST" action="{{route('read.notifications')}}">
                                             @csrf
-                                            
+
                                         <button type="submit" class="min-w-fit text-[#8c9097] dark:text-white/50 me-1 ">
                                             <i class="ti ti-x text-[1rem]"></i>
                                     </button>
@@ -849,9 +847,9 @@
 
                                 </div>
                                     <div class="dropdown-divider"></div>
-                                    <ul class="list-none !m-0 !p-0 end-0" id="header-notification-scroll">
+                                    <ul class="list-none !m-0 !p-0 end-0 " style="overflow-y:scroll;" id="header-notification-scroll">
 
-                                        @foreach (auth()->user()->notifications as $notification )
+                                        @foreach (auth()->user()->unreadNotifications as $notification )
 
                                     <li class="ti-dropdown-item dropdown-item ">
                                         <div class="flex items-start">
@@ -860,17 +858,22 @@
                                             class="inline-flex text-primary justify-center items-center !w-[2.5rem] !h-[2.5rem] !leading-[2.5rem] !text-[0.8rem] !bg-primary/10 !rounded-[50%]">
                                             <i  class="{{ $notification->data['icon'] }}"></i>
                                         </span>
- 
+
                                         </div>
                                         <div class="grow flex items-center justify-between">
                                             <div>
                                             <p class="mb-0 text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50 text-[0.8125rem] font-semibold"><a
                                                 href="notifications.html">  {{ $notification->data['message'] }}</a></p>
                                             <span class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">
-                                                {{ $notification->data['description'] ?? '' }}</span>
+                                                {{ $notification->data['description'] ?? ''   }} 
 
-                                             </div>
-                                           
+                                            </span>
+                                                <br>
+                                            <span class="text-[#8c9097] dark:text-white/50 font-normal text-[0.75rem] header-notification-text">
+                                                {{ $notification->data['remind'] ?? '' }} <br>   {{ $notification->data['time'] ?? ''}}
+                                            </span>
+                                              </div>
+
                                         </div>
                                         </div>
                                     </li>
@@ -881,7 +884,7 @@
                                     <div class="p-4 empty-header-item1 border-t mt-2">
                                     <div class="grid">
                                         <a href="{{route('notifications.index')}}" class="ti-btn ti-btn-primary-full !m-0 w-full p-2">View All</a>
-                                
+
                                     </div>
                                     </div>
                                     <div class="p-[3rem] empty-item1 hidden">
@@ -1128,7 +1131,7 @@
                             <!-- End::slide -->
                             <!-- Start::slide__category -->
                             <li class="slide__category"><span class="category-name">Pages</span></li>
-                          
+
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <i class="bx bx-file-blank side-menu__icon"></i>
@@ -1137,7 +1140,7 @@
                                         <i class="fe fe-chevron-right side-menu__angle"></i>
                                     </a>
                                 <ul class="slide-menu child1">
-                                
+
                                      <li class="slide">
                                         <a href="{{route('status.index')}}" class="side-menu__item">Status</a>
                                     </li>
@@ -1146,11 +1149,11 @@
                                         <a href="{{route('notifications.index')}}" class="side-menu__item">Notifications</a>
                                     </li>
 
-                                    
+
                                  </ul>
                             </li>
                             <!-- End::slide -->
- 
+
                             <li class="slide has-sub">
                                 <a href="javascript:void(0);" class="side-menu__item">
                                     <i class="bx bxs-group side-menu__icon"></i>
@@ -1732,10 +1735,10 @@
                                 </a>
                                 <ul class="slide-menu child1">
                                     <li class="slide side-menu__label1">
-                                        <a href="{{route('event.calendar')}}">Full Calendar</a>
+                                        <a href="{{route('event.index')}}">Full Calendar</a>
                                     </li>
                                     <li class="slide">
-                                        <a href="{{route('event.calendar')}}" class="side-menu__item">Full Calendar</a>
+                                        <a href="{{route('event.index')}}" class="side-menu__item">Full Calendar</a>
                                     </li>
 
                                 </ul>
@@ -2189,7 +2192,6 @@
         <script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>
 
 
- 
 
 
 
@@ -2197,7 +2199,8 @@
 
 
 
-<script src="{{asset('assets/libs/fullcalendar/main.min.js')}}"></script>
+
+ <script src="{{asset('assets/libs/fullcalendar/main.min.js')}}"></script>
         <script src="{{asset('assets/js/fullcalendar.js')}}"></script>
 
 

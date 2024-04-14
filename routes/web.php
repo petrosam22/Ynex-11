@@ -11,6 +11,11 @@ use App\Http\Controllers\SkillsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\EventController;
+use App\Models\Event;
+
+
+
 
 
 Route::get('/',[AuthController::class,'registerForm'])->name('user.registerForm');
@@ -76,8 +81,62 @@ Route::middleware([AuthUser::class,Is_verfiy::class,Is_locked::class])->prefix('
     Route::get('/edit/{id}', [StatusController::class, 'edit'])->name('status.edit');
     Route::put('/update/{id}', [StatusController::class, 'update'])->name('status.update');
 
-    
+
 });
+Route::middleware([AuthUser::class,Is_verfiy::class,Is_locked::class])->prefix('event')->group(function(){
+
+    Route::get('/createForm', [EventController::class, 'createForm'])->name('event.createForm');
+    Route::post('/store', [EventController::class, 'store'])->name('event.store');
+    Route::get('/index', [EventController::class, 'index'])->name('event.index');
+    Route::get('/timeline', [EventController::class, 'timeline'])->name('event.timeline');
+    Route::post('/close/{id}', [EventController::class, 'close'])->name('event.close');
+    Route::post('/cancel/{id}', [EventController::class, 'cancel'])->name('event.cancel');
+    Route::post('/accept/{id}', [EventController::class, 'accept'])->name('event.accept');
+    Route::patch('/update/{id}', [EventController::class, 'update'])->name('event.update');
+    Route::get('/edit/{id}', [EventController::class, 'edit'])->name('event.edit');
+    Route::get('/search', [EventController::class, 'search'])->name('event.search');
+    Route::get('/remind', [EventController::class, 'remind'])->name('event.remind');
+
+
+});
+
+
+// Route::get('/remind',function(){
+//     use App\Jobs\EventReminderJob;
+//     use Carbon\Carbon;
+   
+   
+// // Create the event
+// $event =Event::find(20);
+// // Set the event details
+
+// // Calculate the delay until the event starts
+// $eventStartTime = Carbon::parse($event->date->format('Y-m-d') . ' ' . $event->from);
+// $delay = $eventStartTime->diffInSeconds(Carbon::now());
+
+
+//  // Dispatch the job with the calculated delay
+// EventReminderJob::dispatch($event)->delay($delay);
+
+
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -238,20 +297,6 @@ Route::prefix('tasks')->group(function(){
 
 
 
-Route::prefix('calendar')->group(function(){
-    Route::get('/', function (){
-        return view('event.calendar');
-
-    })->name('event.calendar');
-
-
-
-    Route::get('/timeline', function (){
-        return view('event.timeline');
-
-    })->name('event.timeline');
-});
-
 
 
 
@@ -295,7 +340,6 @@ Route::prefix('blog')->group(function(){
 
     // })->name('team.create');
 });
-
 
 
 

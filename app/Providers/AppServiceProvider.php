@@ -12,6 +12,7 @@ use App\Service\PasswordResetService;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use App\Service\VerificationCodeService;
+use App\Service\EventService;
 use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ProfileService::class);
         $this->app->bind(PasswordResetService::class);
         $this->app->bind(StatusService::class);
+        $this->app->bind(EventService::class);
 
 
 

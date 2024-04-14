@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('statuses', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->timestamp('date');
+
+            $table->time('from');
+            $table->time('to');
+            $table->longText('description');
             $table->foreignId('user_id')->constrained();
-            $table->enum('model',['task','project','event','course','lesson','workspaces','crypto']);
-            $table->boolean('is_accept')->default(false)->nullable();
-            $table->string('color');
+            $table->foreignId('status_id')->constrained();
+            $table->boolean('is_accept')->default(false);
+
             $table->softDeletes();
             $table->timestamps();
         });
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('statuses');
+        Schema::dropIfExists('events');
     }
 };

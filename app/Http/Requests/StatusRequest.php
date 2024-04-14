@@ -25,6 +25,7 @@ class StatusRequest extends FormRequest
         return [
             'name'=>'required|string|unique:statuses',
             'model'=>'required',
+            'color'=>'required',
          ];
     }
 }
